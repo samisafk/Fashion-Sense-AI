@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fashion Sense AI - Multimodal Search</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <div class="logo">
+                <h1>👗 Fashion Sense AI</h1>
+                <p class="subtitle">Multimodal Fashion Search with AI Reasoning</p>
+            </div>
+            <div class="header-info">
+                <span class="badge">896D Embeddings</span>
+                <span class="badge">CLIP + SBERT</span>
+                <span class="badge">Gemma-3 LLM</span>
+            </div>
+        </header>
+
+        <!-- Search Section -->
+        <section class="search-section">
+            <div class="search-card">
+                <h2>🔍 Search Your Style</h2>
+                
+                <!-- HF Token Input -->
+                <div class="form-group">
+                    <label for="hf-token">
+                        🔑 Hugging Face Token (Required for LLM Reasoning)
+                        <a href="https://huggingface.co/settings/tokens" target="_blank" class="link-small">Get Token</a>
+                    </label>
+                    <input type="password" id="hf-token" placeholder="Enter your HF token" class="input-field">
+                </div>
+
+                <!-- Search Mode Tabs -->
+                <div class="tabs">
+                    <button class="tab active" data-mode="image">📷 Image Search</button>
+                    <button class="tab" data-mode="text">📝 Text Search</button>
+                    <button class="tab" data-mode="multimodal">🎨 Multimodal</button>
+                </div>
+
+                <!-- Image Search -->
+                <div class="search-mode" id="image-mode">
+                    <div class="upload-area" id="upload-area">
+                        <input type="file" id="image-input" accept="image/*" hidden>
+                        <div class="upload-placeholder">
+                            <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                                <polyline points="17 8 12 3 7 8"></polyline>
+                                <line x1="12" y1="3" x2="12" y2="15"></line>
+                            </svg>
+                            <p>Click to upload or drag & drop</p>
+                            <span>PNG, JPG, JPEG up to 16MB</span>
+                        </div>
+                        <img id="preview-image" class="preview-image" style="display: none;">
+                    </div>
+                </div>
+
+                <!-- Text Search -->
+                <div class="search-mode" id="text-mode" style="display: none;">
+                    <div class="form-group">
+                        <label for="text-query">Describe what you're looking for</label>
+                        <input type="text" id="text-query" 
+                               placeholder="e.g., blue denim jeans, floral midi skirt, casual everyday wear" 
+                               class="input-field">
+                    </div>
+                </div>
+
+                <!-- Multimodal Search -->
+                <div class="search-mode" id="multimodal-mode" style="display: none;">
+                    <div class="upload-area-small" id="upload-area-multi">
+                        <input type="file" id="image-input-multi" accept="image/*" hidden>
+                        <div class="upload-placeholder-small">
+                            <p>📷 Upload Image</p>
+                        </div>
+                        <img id="preview-image-multi" class="preview-image-small" style="display: none;">
+                    </div>
+                    <div class="form-group">
+                        <label for="text-query-multi">+ Add text description</label>
+                        <input type="text" id="text-query-multi" 
+                               placeholder="Add keywords to refine your search" 
+                               class="input-field">
+                    </div>
+                </div>
+
+                <!-- Search Options -->
+                <div class="search-options">
+                    <div class="form-group">
+                        <label for="top-k">Number of Results: <span id="top-k-value">10</span></label>
+                        <input type="range" id="top-k" min="5" max="30" value="10" step="5" class="slider">
+                    </div>
+                    <div class="form-group checkbox-group">
+                        <label>
+                            <input type="checkbox" id="include-reasoning" checked>
+                            Generate AI Outfit Reasoning
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Search Button -->
+                <button class="btn-primary" id="search-btn">
+                    <span class="btn-text">Search</span>
+                    <span class="btn-loader" style="display: none;">
+                        <span class="spinner"></span> Searching...
+                    </span>
+                </button>
+            </div>
+        </section>
+
+        <!-- Results Section -->
+        <section class="results-section" id="results-section" style="display: none;">
+            <!-- LLM Reasoning -->
+            <div class="reasoning-card" id="reasoning-card" style="display: none;">
+                <h3>🧠 AI Outfit Reasoning & Styling Suggestions</h3>
+                <div class="reasoning-content" id="reasoning-content">
+                    <!-- LLM reasoning will be inserted here -->
+                </div>
+            </div>
+
+            <!-- Search Results -->
+            <div class="results-card">
+                <div class="results-header">
+                    <h3>✨ Top Matching Products</h3>
+                    <span class="results-count" id="results-count">0 results</span>
+                </div>
+                <div class="products-grid" id="products-grid">
+                    <!-- Products will be inserted here -->
+                </div>
+            </div>
+        </section>
+
+        <!-- Dataset Info -->
+        <section class="info-section">
+            <div class="info-card">
+                <h3>📊 Dataset Information</h3>
+                <div class="stats-grid" id="stats-grid">
+                    <div class="stat-item">
+                        <span class="stat-label">Total Products</span>
+                        <span class="stat-value" id="total-products">-</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-label">Embeddings</span>
+                        <span class="stat-value" id="total-embeddings">-</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-label">Dimension</span>
+                        <span class="stat-value">896D</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-label">Index Type</span>
+                        <span class="stat-value">FAISS L2</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Embedding Update -->
+            <div class="info-card">
+                <h3>🔄 Update Embeddings</h3>
+                <p class="info-text">Add or update product embeddings to expand the dataset</p>
+                <button class="btn-secondary" id="update-embeddings-btn">
+                    Update Embeddings (10%)
+                </button>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <p>Fashion Sense AI - Multimodal Search System</p>
+            <p class="footer-tech">CLIP (ViT-B/32 512D) + SentenceTransformer (384D) → 896D | FAISS IndexFlatL2 | Gemma-3 LLM</p>
+        </footer>
+    </div>
+
+    <script src="/static/js/app.js"></script>
+</body>
+</html>

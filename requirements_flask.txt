@@ -1,0 +1,30 @@
+# Flask Web Framework
+Flask==3.0.0
+Flask-CORS==4.0.0
+Werkzeug==3.0.1
+
+# Core ML Libraries
+torch>=2.6.0
+transformers
+sentence-transformers
+accelerate
+
+# Computer Vision
+pillow
+
+# Vector Search
+faiss-cpu
+
+# Data Processing
+pandas
+numpy
+
+# HTTP Requests
+requests
+beautifulsoup4
+
+# Hugging Face
+huggingface_hub[hf_xet]
+
+# Compatibility
+protobuf==3.20.3
