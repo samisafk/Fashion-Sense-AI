@@ -15,13 +15,13 @@ A modern **AI-powered Flask web application** with REST API that helps users **s
 
 ## 🖼️ UI Screenshots
 
-### � Flask Web Interface - Main Dashboard
-![Fashion Sense AI - Main Interface](Src/FireShot%20Capture%20001%20-%20Fashion%20Sense%20AI%20-%20Multimodal%20Search%20-%20%5Blocalhost%5D.png)
+### 🎨 Flask Web Interface - Main Dashboard
+![Fashion Sense AI - Main Interface](Src/FireShot%20Capture%20002%20-%20Fashion%20Sense%20AI%20-%20Multimodal%20Search%20-%20%5Blocalhost%5D.png)
 
 *Modern single-page application with three search modes: Image Search, Text Search, and Multimodal Search*
 
 ### 🔍 Search Results with Product Grid
-![Search Results - Product Grid](Src/FireShot%20Capture%20002%20-%20Fashion%20Sense%20AI%20-%20Multimodal%20Search%20-%20%5Blocalhost%5D.png)
+![Search Results - Product Grid](Src/FireShot%20Capture%20001%20-%20Fashion%20Sense%20AI%20-%20Multimodal%20Search%20-%20%5Blocalhost%5D.png)
 
 *Top matching products displayed with images, names, brands, prices, and similarity scores*
 
