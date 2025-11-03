@@ -11,9 +11,19 @@
 
 A modern **AI-powered Flask web application** with REST API that helps users **search for visually similar fashion products** using **896D multimodal embeddings** (CLIP + SentenceTransformer), perform similarity search with **FAISS IndexFlatL2**, and receive **LLM-powered outfit reasoning** using **Gemma-3**.
 
-## 🌐 Features
+---
 
-![Fashion Assistant UI](Src/RAG_main.jpg)
+## 🖼️ UI Screenshots
+
+### � Flask Web Interface - Main Dashboard
+![Fashion Sense AI - Main Interface](Src/FireShot%20Capture%20001%20-%20Fashion%20Sense%20AI%20-%20Multimodal%20Search%20-%20%5Blocalhost%5D.png)
+
+*Modern single-page application with three search modes: Image Search, Text Search, and Multimodal Search*
+
+### 🔍 Search Results with Product Grid
+![Search Results - Product Grid](Src/FireShot%20Capture%20002%20-%20Fashion%20Sense%20AI%20-%20Multimodal%20Search%20-%20%5Blocalhost%5D.png)
+
+*Top matching products displayed with images, names, brands, prices, and similarity scores*
 
 ---
 
@@ -224,6 +234,10 @@ POST /api/embeddings/batch
 ```
 
 See **[FLASK_README.md](FLASK_README.md)** for complete API documentation.
+
+---
+
+## 🧪 Sample Use Cases
 
 ---
 
