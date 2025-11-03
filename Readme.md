@@ -229,24 +229,17 @@ See **[FLASK_README.md](FLASK_README.md)** for complete API documentation.
 
 ## 🖼️ UI Screenshots
 
-### 🧪 Main Landing Page
-![Main UI 2](Src/RAG_main_2.png)
+### 🎨 Flask Web Interface - Main Dashboard
+![Fashion Sense AI - Main Interface](Src/FireShot%20Capture%20001%20-%20Fashion%20Sense%20AI%20-%20Multimodal%20Search%20-%20%5Blocalhost%5D.png)
 
-### 📥 Uploaded Image
-![Uploaded Input](Src/RAG_Uploaded.png)
+*Modern single-page application with three search modes: Image Search, Text Search, and Multimodal Search*
 
-### 👕 Visually Similar Products
-![Visually Similar Products](Src/RAG_Visually_simillar_products.png)
+---
 
-### 🧾 Fake History Simulation
-![Fake History 1](Src/RAG_Fake_history_1.jpg)  
-![Fake History 2](Src/RAG_Fake_History_2.png)
+### � Search Results with Product Grid
+![Search Results - Product Grid](Src/FireShot%20Capture%20002%20-%20Fashion%20Sense%20AI%20-%20Multimodal%20Search%20-%20%5Blocalhost%5D.png)
 
-### 🧠 History-Based Recommendations
-![History Recommendation](Src/RAG_History_based_recomendation.png)
-
-### 🎯 Outfit Suggestions
-![Outfit Suggestions](Src/RAG_Outfit_Suggestions.png)
+*Top matching products displayed with images, names, brands, prices, and similarity scores*
 
 --- 
 

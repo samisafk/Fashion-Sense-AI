@@ -73,69 +73,50 @@ class LLMService:
     
     def _build_image_query_prompt(self, product_list, products):
         """Build prompt for image-based search"""
-        prompt = f"""You are an expert fashion stylist and AI assistant. A user has uploaded an image of a fashion item, 
-and our AI system has found the following similar products from our database (currently containing skirts and jeans):
+        prompt = f"""You're a fashion stylist. Based on the uploaded image, I found these similar products:
 
-**Top Matching Products:**
 {product_list}
 
-**Your Task:**
-1. Analyze the similarity scores and product attributes
-2. Explain WHY these products are good matches (consider style, color, fit, brand positioning)
-3. Provide outfit completion suggestions - what other items would complement these pieces?
-4. Suggest how to style these items for different occasions (casual, formal, party, etc.)
-5. Even though our current dataset has limited categories (skirts/jeans), explain how these pieces can be versatile building blocks for complete outfits
+Provide a brief, friendly response (3-4 short sentences) covering:
+- Why these match the uploaded style
+- 1-2 quick outfit ideas
+- Key styling tips
 
-**Important:** Focus on practical styling advice, color coordination, layering suggestions, and how to create cohesive looks. 
-Be creative and suggest accessories, tops, shoes, or outerwear that would complete the outfit, even if they're not in our current search results.
-
-Provide your response in a friendly, conversational tone with clear sections."""
+Keep it conversational and concise. No markdown formatting, bullet points, or special characters. Just natural paragraphs."""
 
         return prompt
     
     def _build_text_query_prompt(self, product_list, query_text, products):
         """Build prompt for text-based search"""
-        prompt = f"""You are an expert fashion stylist and AI assistant. A user searched for: "{query_text}"
+        prompt = f"""You're a fashion stylist. User searched for: "{query_text}"
 
-Our AI system found these matching products (similarity-based ranking):
+Here are the top matches:
 
-**Top Matching Products:**
 {product_list}
 
-**Your Task:**
-1. Explain how these products match the user's search intent "{query_text}"
-2. Highlight the key style attributes that make these good matches
-3. Suggest complete outfit ideas incorporating these items
-4. Recommend complementary pieces (tops, shoes, accessories, outerwear) to create full looks
-5. Provide styling tips for different contexts (work, weekend, evening out, etc.)
+Give a brief response (3-4 short sentences):
+- How these match "{query_text}"
+- 1-2 quick outfit suggestions
+- One styling tip
 
-**Note:** Our current database contains skirts and jeans, but think creatively about how to build versatile, 
-stylish outfits around these core pieces.
-
-Provide detailed, actionable fashion advice in a warm, helpful tone."""
+Be conversational and concise. No markdown, bullets, or special formatting. Just plain text paragraphs."""
 
         return prompt
     
     def _build_multimodal_prompt(self, product_list, query_text, products):
         """Build prompt for multimodal (image + text) search"""
-        prompt = f"""You are an expert fashion stylist and AI assistant. A user has provided both an image AND a text query: "{query_text}"
+        prompt = f"""You're a fashion stylist. User provided an image and searched for: "{query_text}"
 
-This multimodal search combines visual similarity with semantic understanding. Here are the top matches:
+Top matches:
 
-**Top Matching Products:**
 {product_list}
 
-**Your Task:**
-1. Explain how these products satisfy BOTH the visual style from the image AND the text description
-2. Analyze the synergy between visual and textual features in the search results
-3. Create complete outfit concepts that honor both the aesthetic from the image and the keywords from the text
-4. Suggest complementary items (tops, footwear, accessories, jackets) to complete the look
-5. Provide occasion-specific styling variations
+Give a brief response (3-4 short sentences):
+- How these match both the image style and text "{query_text}"
+- 1-2 outfit ideas
+- One quick styling tip
 
-**Dataset Context:** Our current inventory focuses on skirts and jeans, but use your fashion expertise to suggest 
-how to build complete, cohesive outfits around these foundation pieces.
-
-Deliver your advice in an engaging, professional manner with clear formatting."""
+Keep it friendly and concise. No markdown, bullets, or formatting. Just natural text."""
 
         return prompt
     
@@ -175,7 +156,7 @@ Deliver your advice in an engaging, professional manner with clear formatting.""
                 }
             ],
             "stream": False,
-            "max_tokens": 1000,
+            "max_tokens": 200,
             "temperature": 0.7
         }
         

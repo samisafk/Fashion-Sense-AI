@@ -262,7 +262,17 @@ function displayResults(data) {
     // Display LLM reasoning if available
     if (data.llm_reasoning) {
         document.getElementById('reasoning-card').style.display = 'block';
-        document.getElementById('reasoning-content').textContent = data.llm_reasoning;
+        const reasoningContent = document.getElementById('reasoning-content');
+        // Clean up the response and format it nicely
+        const cleanText = data.llm_reasoning
+            .replace(/\*\*/g, '')  // Remove markdown bold
+            .replace(/\*/g, '')    // Remove markdown italics
+            .replace(/#+ /g, '')   // Remove markdown headers
+            .replace(/\n\n+/g, '\n\n')  // Normalize line breaks
+            .trim();
+        reasoningContent.innerHTML = cleanText.split('\n\n').map(para => 
+            `<p style="margin-bottom: 0.75rem;">${para}</p>`
+        ).join('');
     } else {
         document.getElementById('reasoning-card').style.display = 'none';
     }

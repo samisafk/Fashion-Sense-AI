@@ -34,15 +34,47 @@ class DataService:
         else:
             self.df = pd.concat(dataframes, ignore_index=True)
             
-            # Clean price fields
+            # Clean price fields - extract INR value from dictionary string
             if 'selling_price' in self.df.columns:
-                self.df['selling_price'] = pd.to_numeric(
-                    self.df['selling_price'], 
-                    errors='coerce'
-                ).fillna(0)
+                def extract_price(price_str):
+                    """Extract numeric price from dictionary string like "{'INR': 474848.9539}" """
+                    if pd.isna(price_str) or price_str == '':
+                        return None
+                    try:
+                        # Try to evaluate the string as a dict
+                        if isinstance(price_str, str) and '{' in price_str:
+                            import ast
+                            price_dict = ast.literal_eval(price_str)
+                            if isinstance(price_dict, dict) and 'INR' in price_dict:
+                                return float(price_dict['INR'])
+                        # If already a number, return it
+                        return float(price_str)
+                    except:
+                        return None
+                
+                self.df['selling_price'] = self.df['selling_price'].apply(extract_price)
             
-            # Fill missing values
-            self.df = self.df.fillna('')
+            # Clean MRP field the same way
+            if 'mrp' in self.df.columns:
+                def extract_price(price_str):
+                    """Extract numeric price from dictionary string"""
+                    if pd.isna(price_str) or price_str == '':
+                        return None
+                    try:
+                        if isinstance(price_str, str) and '{' in price_str:
+                            import ast
+                            price_dict = ast.literal_eval(price_str)
+                            if isinstance(price_dict, dict) and 'INR' in price_dict:
+                                return float(price_dict['INR'])
+                        return float(price_str)
+                    except:
+                        return None
+                
+                self.df['mrp'] = self.df['mrp'].apply(extract_price)
+            
+            # Fill missing values (but not prices, keep them as None/NaN)
+            non_numeric_cols = self.df.select_dtypes(exclude=['number']).columns
+            self.df[non_numeric_cols] = self.df[non_numeric_cols].fillna('')
             
             print(f"✓ Total products loaded: {len(self.df)}")
         
